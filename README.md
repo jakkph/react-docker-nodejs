@@ -1,6 +1,8 @@
 
 # ⚡ Day 1
 
+[![Final video of fixing issues in your code in VS Code](https://i.ytimg.com/vi/SEtX6bPmIAg/maxresdefault.jpg)](https://www.youtube.com/watch?app=desktop&v=SEtX6bPmIAg)
+
 ### 👉 การขึ้นโปรเจ็กต์ React + Vite + TS + SWC
 
  🔸Step 1:  คำสั่งขึ้นโปรเจ็กต์
