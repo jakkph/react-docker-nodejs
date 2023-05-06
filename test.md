@@ -1,52 +1,25 @@
-## Embed YouTube Video in Markdown File
+## YouTube embed example
 
-1. Markdown style
-```md
-[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtu.be/nTQUwghvy5Q)
+The YouTube URL of the video is https://www.youtube.com/watch?v=JLMbpiywVxQ. 
+
+Here is how to embed a clickable preview:
+
+```markdown
+[![Final video of fixing issues in your code in VS Code]
+(https://img.youtube.com/vi/JLMbpiywVxQ/maxresdefault.jpg)]
+(https://www.youtube.com/watch?v=JLMbpiywVxQ)
 ```
 
-2. HTML style
-```html
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=nTQUwghvy5Q" target="_blank">
- <img src="http://img.youtube.com/vi/nTQUwghvy5Q/mqdefault.jpg" alt="Watch the video" width="240" height="180" border="10" />
-</a>
-```
+Which shows as:
 
-3. embed thumbnail
-```md
-![alt text][image]
-[image]: /full/path/to/image/file.jpg "alt_txt"
-```
+[![Final video of fixing issues in your code in VS Code](https://img.youtube.com/vi/JLMbpiywVxQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=JLMbpiywVxQ)
 
-4. resize thumbnail
-```md
-<img src="/full/path/to/image/file.jpg" alt="alt_text" width="200">
-```
+Here is how to embed the video:
 
-### Extras on Thumbnail Format  
+{% raw %}
+{% include youtube.html id="JLMbpiywVxQ" %}  
+{% endraw %}
 
-Each YouTube video has 4 generated images. The first one in the list is a full size image and others are thumbnail images. They are predictably formatted as follows:
+{% include youtube.html id="JLMbpiywVxQ" %}  
 
-```md
-https://img.youtube.com/vi/<insert-youtube-video-id-here>/0.jpg
-https://img.youtube.com/vi/<insert-youtube-video-id-here>/1.jpg
-https://img.youtube.com/vi/<insert-youtube-video-id-here>/2.jpg
-https://img.youtube.com/vi/<insert-youtube-video-id-here>/3.jpg
-```
-
-The default thumbnail image (ie. one of 1.jpg, 2.jpg, 3.jpg) is:
-
-```md
-https://img.youtube.com/vi/<insert-youtube-video-id-here>/default.jpg  
-```
-
-Other than the default.jpg, the following thumbnail formats are also available:
-
-* hqdefault.jpg <- high quality  
-* mqdefault.jpg <- medium quality  
-* sddefault.jpg <- standard definition  
-* maxresdefault.jpg <- maximum resolution  
-
-_NB: sddefault.jpg and maxresdefault.jpg are not always available._
-
-All of the above urls are available over http too. Additionally, the slightly shorter hostname `i3.ytimg.com` works in place of `img.youtube.com` in the example urls above.
+To enable this, you need to create an `_includes` folder in your GitHub Pages root folder and include the [youtube.html](youtube.html) file from this repository.
