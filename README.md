@@ -191,9 +191,9 @@ docker compose up -d  --build
 
 # ⚡ Day 3 : React Material UI
 
-### เอกสารประกอบการอบรม
+### Gighub : <https://github.com/iamsamitdev/react-mui-strapi-day3>
 
-- <https://github.com/iamsamitdev/react-mui-strapi-day3>
+[![Final video of fixing issues in your code in VS Code](https://i.ytimg.com/vi/1Wj9pUspvBQ/maxresdefault.jpg)](https://youtu.be/1Wj9pUspvBQ)
 
 ---
 
@@ -358,9 +358,7 @@ export default theme
 
 # ⚡ Day 4 : Strapi CMS Rest API
 
-### เอกสารประกอบการอบรม
-
-- <https://github.com/iamsamitdev/react-mui-strapi-day4>
+### Gighub : <https://github.com/iamsamitdev/react-mui-strapi-day4>
 
 ---
 
