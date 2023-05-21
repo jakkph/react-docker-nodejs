@@ -13,13 +13,13 @@
 <details>
 <summary> 👉 การขึ้นโปรเจ็กต์ React + Vite + TS + SWC:</summary>
 
-🔸Step 1: คำสั่งขึ้นโปรเจ็กต์
+▶️ Step 1: คำสั่งขึ้นโปรเจ็กต์
 
 ```bash
 npm create vite@latest
 ```
 
-🔸Step 2: ตั้งชื่อโปรเจ็กต์ และเลือกรูปแบบเป็น typescript + swc
+▶️ Step 2: ตั้งชื่อโปรเจ็กต์ และเลือกรูปแบบเป็น typescript + swc
 
 ```bash
 Project name >> sample-react
@@ -29,19 +29,19 @@ Select a framework >> React
 Select a variant >> TypeScript + SWC
 ```
 
-🔸Step 2: เปิดเข้า VSCode
+▶️ Step 2: เปิดเข้า VSCode
 
 ```bash
  code sample-react -r
 ```
 
-🔸Step 4: ติดตั้ง Node dependencies
+▶️ Step 4: ติดตั้ง Node dependencies
 
 ```bash
  npm install
 ```
 
-🔸Step 5: รันโปรเจ็กต์ด้วย Vite
+▶️ Step 5: รันโปรเจ็กต์ด้วย Vite
 
 ```bash
 npm run dev
@@ -239,9 +239,9 @@ npm install @mui/material @emotion/react @emotion/styled
 
 ▶️ Step 6: ทดสอบเรียกใช้งาน MUI ที่ไฟล์ src/App.tsx
 
-> > ⚠️ ลบไฟล์ App.css ใน src อออกApples
+> ⚠️ ลบไฟล์ App.css ใน src อออกApples
 >
-> > ⚠️ ลบคำสั่ง css ในไฟล์ index.css ออกทั้งหมด
+> ⚠️ ลบคำสั่ง css ในไฟล์ index.css ออกทั้งหมด
 
 ```ts
 import { Button } from "@mui/material";
@@ -260,7 +260,7 @@ function App() {
 export default App;
 ```
 
-> > ⚠️ เพิ่ม goole font ที่ไฟล์ index.html
+>⚠️ เพิ่ม goole font ที่ไฟล์ index.html
 
 ```html
 <link
@@ -269,7 +269,7 @@ export default App;
 />
 ```
 
-> > ⚠️ กำหนดโค้ดที่ไฟล์ index.css
+> ⚠️ กำหนดโค้ดที่ไฟล์ index.css
 
 ```css
 html,
@@ -287,17 +287,16 @@ npm install @mui/icons-material
 ▶️ Step 8: ทดสอบใช้งาน Icons
 
 ```html
-<h3>MUI Button with Icon</h3>
-  <Stack direction="row" spacing={2}>
-    <Button variant="text" startIcon={<Delete />}>Delete</Button>
-    <Button variant="contained" startIcon={<Send />}>Send</Button>
-    <Button variant="outlined" startIcon={<Photo />}>Photo</Button>
-  </Stack>
-</h3>
+ <h3>MUI Button with Icon</h3>
+ <Stack direction="row" spacing={2}>
+   <Button variant="text" startIcon={<Delete />}>Delete</Button>
+   <Button variant="contained" startIcon={<Send />}>Send</Button>
+   <Button variant="outlined" startIcon={<Photo />}>Photo</Button>
+ </Stack> 
 ```
 
 ▶️ Step 9: การสร้าง Theme ใน MUI
->>⚠️ สร้าง src/config/theme.ts
+>⚠️ สร้าง src/config/theme.ts
 
 ```ts
 import { createTheme } from '@mui/material/styles'
