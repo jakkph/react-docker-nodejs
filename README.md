@@ -189,11 +189,179 @@ docker compose up -d  --build
 
 ---
 
+# ⚡ Day 3 : React Material UI
+
+### เอกสารประกอบการอบรม
+
+- <https://github.com/iamsamitdev/react-mui-strapi-day3>
+
+---
+
+<details>
+<summary> 👉 การขึ้นโปรเจ็กต์ React + Vite + TS + SWC+ Material UI:</summary>
+<br/>
+
+▶️ Step 1: Clone Project
+
+```bash
+git clone https://github.com/iamsamitdev/react-mui-strapi.git
+```
+
+▶️ Step 2: ตรวจสอบความถูกต้องของ docker-compose.yml ไฟล์
+
+```bash
+docker compose config
+```
+
+▶️ Step 3: Create container
+
+```bash
+docker compose up -d
+docker compose up -d --build
+```
+
+▶️ Step 4: Install Material UI Library
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+
+▶️ Step 5: Config tsconfig.json
+
+```json
+"compilerOptions": {
+    "lib": ["es6", "dom"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+}
+```
+
+▶️ Step 6: ทดสอบเรียกใช้งาน MUI ที่ไฟล์ src/App.tsx
+
+> > ⚠️ ลบไฟล์ App.css ใน src อออกApples
+>
+> > ⚠️ ลบคำสั่ง css ในไฟล์ index.css ออกทั้งหมด
+
+```ts
+import { Button } from "@mui/material";
+
+function App() {
+  return (
+    <>
+      <h1>MUI Button</h1>
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </>
+  );
+}
+
+export default App;
+```
+
+> > ⚠️ เพิ่ม goole font ที่ไฟล์ index.html
+
+```html
+<link
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@200;300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+```
+
+> > ⚠️ กำหนดโค้ดที่ไฟล์ index.css
+
+```css
+html,
+body {
+  font-family: "IBM Plex Sans Thai", sans-serif;
+}
+```
+
+▶️ Step 7: ติดตั้ง Material Icons
+
+```bash
+npm install @mui/icons-material
+```
+
+▶️ Step 8: ทดสอบใช้งาน Icons
+
+```html
+<h3>MUI Button with Icon</h3>
+  <Stack direction="row" spacing={2}>
+    <Button variant="text" startIcon={<Delete />}>Delete</Button>
+    <Button variant="contained" startIcon={<Send />}>Send</Button>
+    <Button variant="outlined" startIcon={<Photo />}>Photo</Button>
+  </Stack>
+</h3>
+```
+
+▶️ Step 9: การสร้าง Theme ใน MUI
+>>⚠️ สร้าง src/config/theme.ts
+
+```ts
+import { createTheme } from '@mui/material/styles'
+import { green, grey, indigo } from '@mui/material/colors'
+
+// Create a theme instance.
+let theme = createTheme()
+
+// Custom theme
+theme = createTheme(theme, {
+    palette: {
+        primary: {
+            main: grey[700],
+            light: grey[50],
+            dark: grey[900],
+        },
+        secondary: {
+            main: indigo[50],
+        },
+        success: {
+            main: green[500],
+            light: green[50],
+            dark: green[900],
+        },
+    },
+    typography: {
+        link: {
+            fontSize: '0.8rem',
+            [theme.breakpoints.up('md')]: {
+                fontSize: '0.9rem',
+            },
+            fontWeight: 500,
+            color: theme.palette.primary.main,
+            display: 'block',
+            cursor: 'pointer'
+        },
+        cardTitle: {
+            fontSize: '1.2rem',
+            display: 'block',
+            fontWeight: 500
+        },
+        h6: {
+            fontSize: '1rem',
+        },
+        h7: {
+            fontSize: '0.8rem', 
+        },
+        h8: {
+            fontSize: '0.7rem', 
+        }
+    },
+})
+
+export default theme
+```
+
+</details>
+```
+
 # ⚡ Day 4 : Strapi CMS Rest API
 
 ### เอกสารประกอบการอบรม
 
-- <https://github.com/iamsamitdev/react-mui-strapi-day4/tree/main>
+- <https://github.com/iamsamitdev/react-mui-strapi-day4>
 
 ---
 
