@@ -19,6 +19,14 @@
 npm create vite@latest
 ```
 
+---
+
+<br/>
+
+<br/>
+
+---
+
 ▶️ Step 2: ตั้งชื่อโปรเจ็กต์ และเลือกรูปแบบเป็น typescript + swc
 
 ```bash
@@ -138,7 +146,7 @@ services:
 
 ▶️ Step 7: แก้ไขไฟล์ vite.config.js
 
-```js
+```tsx
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 
@@ -170,10 +178,13 @@ docker compose up -d
 # ถ้าแก้ไขอะไรใน dockerfile และ docker-compose.yml แล้วจะรันใหม่
 docker compose up -d  --build
 ```
-
 </details>
 
 ---
+
+<br/>
+
+<br/>
 
 # ⚡ Day 2
 
@@ -188,6 +199,10 @@ docker compose up -d  --build
 - <https://github.com/iamsamitdev/react-layout-online/blob/main/NoteScriptReactNodeJSDockerDay2.txt>
 
 ---
+
+<br/>
+
+<br/>
 
 # ⚡ Day 3 : React Material UI
 
@@ -243,7 +258,7 @@ npm install @mui/material @emotion/react @emotion/styled
 >
 > ⚠️ ลบคำสั่ง css ในไฟล์ index.css ออกทั้งหมด
 
-```ts
+```tsx
 import { Button } from "@mui/material";
 
 function App() {
@@ -286,7 +301,7 @@ npm install @mui/icons-material
 
 ▶️ Step 8: ทดสอบใช้งาน Icons
 
-```html
+```tsx
  <h3>MUI Button with Icon</h3>
  <Stack direction="row" spacing={2}>
    <Button variant="text" startIcon={<Delete />}>Delete</Button>
@@ -296,9 +311,8 @@ npm install @mui/icons-material
 ```
 
 ▶️ Step 9: การสร้าง Theme ใน MUI
->⚠️ สร้าง src/config/theme.ts
 
-```ts
+```tsx
 import { createTheme } from '@mui/material/styles'
 import { green, grey, indigo } from '@mui/material/colors'
 
@@ -353,8 +367,887 @@ theme = createTheme(theme, {
 export default theme
 ```
 
+
+
+▶️ Step 10: config ไฟล์ main.tsx
+
+```tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+// ThemeProvider is required for Material-UI
+import { ThemeProvider } from '@mui/material'
+
+// Import the theme
+import theme from './config/theme'
+
+import App from './App.tsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+    <App />
+    </ThemeProvider>
+  </React.StrictMode>,
+)
+```
+
+▶️ Step 11: Create AuthLayout.tsx in src/layouts
+
+```bash
+import { Outlet } from "react-router-dom"
+import { Box } from "@mui/material"
+
+const AuthLayout = () => {
+  return (
+    <>
+      <Box>
+        <Outlet />
+      </Box>
+    </>
+  )
+}
+
+export default AuthLayout
+```
+
+▶️ Step 12: Install react-pro-sidebar
+
+```bash
+npm i react-pro-sidebar@1.0.0
+```
+
+▶️ Step 13: Create AppHeader.tsx in components
+
+```tsx
+import { AppBar, Box, IconButton, Toolbar } from "@mui/material"
+import MenuIcon from '@mui/icons-material/Menu'
+import SettingsIcon from '@mui/icons-material/Settings'
+import LogoutIcon from '@mui/icons-material/Logout'
+
+const AppHeader = () => {
+
+    return (
+        <AppBar position="sticky" sx={styles.appBar}>
+            <Toolbar>
+                <IconButton color="secondary">
+                    <MenuIcon />
+                </IconButton>
+                <Box
+                    component={'img'}
+                    sx={styles.appLogo}
+                    src="/assets/logo_round.png" />
+                <Box sx={{ flexGrow: 1 }} />
+                <IconButton title="Settings" color="secondary">
+                    <SettingsIcon />
+                </IconButton>
+                <IconButton title="Sign Out" color="secondary">
+                    <LogoutIcon />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
+    )
+}
+
+const styles = {
+    appBar: {
+        // bgcolor: 'neutral.main'
+        bgcolor: 'teal'
+    },
+    appLogo: {
+        borderRadius: 2,
+        width: 40,
+        marginLeft: 2,
+        cursor: 'pointer'
+    }
+}
+
+export default AppHeader
+```
+
+▶️ Step 14: Create SideNav.tsx in src/components
+
+```tsx
+import { Avatar, Box, Typography } from "@mui/material"
+import { Menu, MenuItem, Sidebar } from "react-pro-sidebar"
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'
+import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined'
+import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined'
+import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined'
+
+const SideNav = () => {
+    return (
+        <Sidebar
+            style={{ height: "100%", top: 'auto' }}
+            breakPoint="md"
+            backgroundColor={'white'}
+        >
+            <Box sx={styles.avatarContainer}>
+                <Avatar sx={styles.avatar} alt="Masoud" src="/assets/samit.jpg" />
+                <Typography variant="body2" sx={styles.yourChannel}>Samit Koyom</Typography>
+                <Typography variant="body2">Administrator</Typography>
+            </Box>
+
+            <Menu
+                menuItemStyles={{
+
+                }}>
+                <MenuItem icon={<DashboardOutlinedIcon />}> <Typography variant="body2">Dashboard</Typography> </MenuItem>
+                <MenuItem icon={<SourceOutlinedIcon />}> <Typography variant="body2">Product </Typography></MenuItem>
+                <MenuItem icon={<AnalyticsOutlinedIcon />}> <Typography variant="body2">Report </Typography></MenuItem>
+                <MenuItem icon={<StyleOutlinedIcon />}> <Typography variant="body2">Setting </Typography></MenuItem >
+            </Menu >
+        </Sidebar >
+    )
+}
+
+const styles = {
+    avatarContainer: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: 'column',
+        my: 5
+    },
+    avatar: {
+        width: '40%',
+        height: 'auto'
+    },
+    yourChannel: {
+        mt: 1
+    }
+}
+
+export default SideNav
+```
+
+▶️ Step 15: Create BackendLayout.tsx in src/layouts
+
+```tsx
+import { Outlet } from "react-router-dom"
+import { Box } from "@mui/material"
+import CssBaseline from "@mui/material/CssBaseline"
+import AppHeader from "../components/AppHeader"
+import SideNav from "../components/SideNav"
+
+const BackendLayout = () => {
+  return (
+    <>
+        <CssBaseline />
+        <AppHeader />
+        <Box sx={styles.container}>
+          <SideNav />
+          <Box component={"main"} sx={styles.mainSection}>
+            <Outlet />
+          </Box>
+        </Box>
+    </>
+  )
+}
+
+const styles = {
+  container: {
+    display: "flex",
+    bgcolor: "neutral.light",
+  },
+  mainSection: {
+    px: 4,
+    width: "100%",
+    height: "100%",
+    overflow: "auto",
+  },
+}
+
+export default BackendLayout
+```
+
+▶️ Step 16: Create Login.tsx in src/pages
+
+```ts
+const Login = () => {
+  return (
+    <>
+        <h1>Login</h1>
+    </>
+  )
+}
+
+export default Login
+```
+
+▶️ Step 17: Create Dashboard.tsx in src/pages
+
+```ts
+const Dashboard = () => {
+  return (
+    <>
+        <h1>Dashboard</h1>
+    </>
+  )
+}
+
+export default Dashboard
+```
+
+▶️ Step 18: install react-router-dom
+
+```ts
+npm install react-router-dom@6
+```
+▶️ Step 19: config ProSidebarProvider in main.tsx
+
+```ts
+// Import ProSidebarProvider
+import { ProSidebarProvider } from 'react-pro-sidebar'
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <ProSidebarProvider>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ProSidebarProvider>
+  </React.StrictMode>,
+)
+```
+
+▶️ Step 20: กำหนด Routing ที่ไฟล์ App.tsx
+
+```ts
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
+import BackendLayout from './layouts/BackendLayout'
+import AuthLayout from './layouts/AuthLayout'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Login />} />
+        </Route>
+        <Route element={<BackendLayout />}>
+          <Route path="/backend/dashboard" element={<h1>Dashboard</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
+```
+
+▶️ Step 21: Create Product.tsx, Report.tsx, Setting.tsx in src/pages
+
+```ts
+
+const Product = () => {
+    return (
+      <>
+          <h1>Product</h1>
+      </>
+    )
+  }
+  
+  export default Product
+  ```
+
+▶️ Step 22: Config Route in App.tsx
+
+```ts
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
+import BackendLayout from './layouts/BackendLayout'
+import AuthLayout from './layouts/AuthLayout'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Login />} />
+        </Route>
+        <Route element={<BackendLayout />}>
+          <Route path="/backend/dashboard" element={<h1>Dashboard</h1>} />
+          <Route path="/backend/product" element={<h1>Product</h1>} />
+          <Route path="/backend/report" element={<h1>Report</h1>} />
+          <Route path="/backend/setting" element={<h1>Setting</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
+```
+
+▶️ Step 23: Set Link in SideNav.tsx
+
+```ts
+<MenuItem component={<Link to="/backend/dashboard" />} icon={<DashboardOutlinedIcon />}> <Typography variant="body2">Dashboard</Typography> </MenuItem>
+<MenuItem component={<Link to="/backend/product" />} icon={<SourceOutlinedIcon />}> <Typography variant="body2">Product </Typography></MenuItem>
+<MenuItem component={<Link to="/backend/report" />} icon={<AnalyticsOutlinedIcon />}> <Typography variant="body2">Report </Typography></MenuItem>
+<MenuItem component={<Link to="/backend/setting" />} icon={<StyleOutlinedIcon />}> <Typography variant="body2">Setting </Typography></MenuItem >
+```
+
+▶️ Step 24: Toggle SideNav
+
+```ts
+import { useProSidebar } from "react-pro-sidebar"
+
+const AppHeader = () => {
+
+// useProSidebar hook
+  const { collapseSidebar, toggleSidebar, broken } = useProSidebar()
+
+}
+
+ <IconButton onClick={()=> broken ? toggleSidebar() : collapseSidebar()} color="secondary">
+    <MenuIcon />
+  </IconButton>
+```
+
+▶️ Step 25: Create Login Screen
+
+```ts
+import { TextField, Button } from "@mui/material"
+
+const Login = () => {
+  return (
+    <>
+        <h1>Login</h1>
+        <form>
+          <div>
+            <TextField label="Username"
+              type="text"
+              variant="outlined"
+            />
+          </div>
+
+          <div>
+            <TextField label="Password"
+              type="password"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <Button variant="contained" color="primary" type="submit">
+              Login
+            </Button>
+          </div>
+        </form>
+    </>
+  )
+}
+
+export default Login
+```
+
+▶️ Step 26: การจัดการกับแบบฟอร์มด้วย react-hook-form
+
+>⚠️ ติดตั้ง npm install react-hook-form@7 เรียกใช้งานที่หน้า Login.tsx
+
+```ts
+---
+import { TextField, Button } from "@mui/material"
+import { useForm } from "react-hook-form"
+
+const Login = () => {
+
+  // useForm hook
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
+  // onSubmit function
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
+  return (
+    <>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <TextField label="Username"
+              type="text"
+              variant="outlined"
+              {...register("username", { required: true, minLength: 5 })}
+              error={errors.username ? true : false}
+              helperText={errors.username ? "Username is required" : ""}
+            />
+          </div>
+
+          <div>
+            <TextField label="Password"
+              type="password"
+              variant="outlined"
+              {...register("password", { required: true })}
+              error={errors.password ? true : false}
+              helperText={errors.password ? "Password is required" : ""}
+            />
+          </div>
+          <div>
+            <Button variant="contained" color="primary" type="submit">
+              Login
+            </Button>
+          </div>
+        </form>
+    </>
+  )
+}
+
+export default Login
+
+
+
+
 </details>
 ```
+
+# ⚡ Day 4 : Strapi CMS Rest API
+
+### Gighub : <https://github.com/iamsamitdev/react-mui-strapi-day4>
+
+---
+
+▶️ Step 10: config ไฟล์ main.tsx
+
+```tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+// ThemeProvider is required for Material-UI
+import { ThemeProvider } from '@mui/material'
+
+// Import the theme
+import theme from './config/theme'
+
+import App from './App.tsx'
+import './index.css'
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+    <App />
+    </ThemeProvider>
+  </React.StrictMode>,
+)
+```
+
+▶️ Step 11: Create AuthLayout.tsx in src/layouts
+
+```tsx
+import { Outlet } from "react-router-dom"
+import { Box } from "@mui/material"
+
+const AuthLayout = () => {
+  return (
+    <>
+      <Box>
+        <Outlet />
+      </Box>
+    </>
+  )
+}
+
+export default AuthLayout
+```
+
+▶️ Step 12: Install react-pro-sidebar
+
+```bash
+npm i react-pro-sidebar@1.0.0
+```
+
+▶️ Step 13: Create AppHeader.tsx in components
+
+```tsx
+import { AppBar, Box, IconButton, Toolbar } from "@mui/material"
+import MenuIcon from '@mui/icons-material/Menu'
+import SettingsIcon from '@mui/icons-material/Settings'
+import LogoutIcon from '@mui/icons-material/Logout'
+
+const AppHeader = () => {
+
+    return (
+        <AppBar position="sticky" sx={styles.appBar}>
+            <Toolbar>
+                <IconButton color="secondary">
+                    <MenuIcon />
+                </IconButton>
+                <Box
+                    component={'img'}
+                    sx={styles.appLogo}
+                    src="/assets/logo_round.png" />
+                <Box sx={{ flexGrow: 1 }} />
+                <IconButton title="Settings" color="secondary">
+                    <SettingsIcon />
+                </IconButton>
+                <IconButton title="Sign Out" color="secondary">
+                    <LogoutIcon />
+                </IconButton>
+            </Toolbar>
+        </AppBar>
+    )
+}
+
+const styles = {
+    appBar: {
+        // bgcolor: 'neutral.main'
+        bgcolor: 'teal'
+    },
+    appLogo: {
+        borderRadius: 2,
+        width: 40,
+        marginLeft: 2,
+        cursor: 'pointer'
+    }
+}
+
+export default AppHeader
+```
+
+▶️ Step 14: Create SideNav.tsx in src/components
+
+```tsx
+import { Avatar, Box, Typography } from "@mui/material"
+import { Menu, MenuItem, Sidebar } from "react-pro-sidebar"
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined'
+import StyleOutlinedIcon from '@mui/icons-material/StyleOutlined'
+import SourceOutlinedIcon from '@mui/icons-material/SourceOutlined'
+import AnalyticsOutlinedIcon from '@mui/icons-material/AnalyticsOutlined'
+
+const SideNav = () => {
+    return (
+        <Sidebar
+            style={{ height: "100%", top: 'auto' }}
+            breakPoint="md"
+            backgroundColor={'white'}
+        >
+            <Box sx={styles.avatarContainer}>
+                <Avatar sx={styles.avatar} alt="Masoud" src="/assets/samit.jpg" />
+                <Typography variant="body2" sx={styles.yourChannel}>Samit Koyom</Typography>
+                <Typography variant="body2">Administrator</Typography>
+            </Box>
+
+            <Menu
+                menuItemStyles={{
+
+                }}>
+                <MenuItem icon={<DashboardOutlinedIcon />}> <Typography variant="body2">Dashboard</Typography> </MenuItem>
+                <MenuItem icon={<SourceOutlinedIcon />}> <Typography variant="body2">Product </Typography></MenuItem>
+                <MenuItem icon={<AnalyticsOutlinedIcon />}> <Typography variant="body2">Report </Typography></MenuItem>
+                <MenuItem icon={<StyleOutlinedIcon />}> <Typography variant="body2">Setting </Typography></MenuItem >
+            </Menu >
+        </Sidebar >
+    )
+}
+
+const styles = {
+    avatarContainer: {
+        display: "flex",
+        alignItems: "center",
+        flexDirection: 'column',
+        my: 5
+    },
+    avatar: {
+        width: '40%',
+        height: 'auto'
+    },
+    yourChannel: {
+        mt: 1
+    }
+}
+
+export default SideNav
+```
+
+▶️ Step 15: Create BackendLayout.tsx in src/layouts
+
+```tsx
+import { Outlet } from "react-router-dom"
+import { Box } from "@mui/material"
+import CssBaseline from "@mui/material/CssBaseline"
+import AppHeader from "../components/AppHeader"
+import SideNav from "../components/SideNav"
+
+const BackendLayout = () => {
+  return (
+    <>
+        <CssBaseline />
+        <AppHeader />
+        <Box sx={styles.container}>
+          <SideNav />
+          <Box component={"main"} sx={styles.mainSection}>
+            <Outlet />
+          </Box>
+        </Box>
+    </>
+  )
+}
+
+const styles = {
+  container: {
+    display: "flex",
+    bgcolor: "neutral.light",
+  },
+  mainSection: {
+    px: 4,
+    width: "100%",
+    height: "100%",
+    overflow: "auto",
+  },
+}
+
+export default BackendLayout
+```
+
+▶️ Step 16: Create Login.tsx in src/pages
+
+```tsx
+const Login = () => {
+  return (
+    <>
+        <h1>Login</h1>
+    </>
+  )
+}
+
+export default Login
+```
+
+▶️ Step 17: Create Dashboard.tsx in src/pages
+
+```tsx
+const Dashboard = () => {
+  return (
+    <>
+        <h1>Dashboard</h1>
+    </>
+  )
+}
+
+export default Dashboard
+```
+
+▶️ Step 18: install react-router-dom
+
+```bash
+npm install react-router-dom@6
+```
+
+▶️ Step 19: config ProSidebarProvider in main.tsx
+
+```tsx
+// Import ProSidebarProvider
+import { ProSidebarProvider } from 'react-pro-sidebar'
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <ProSidebarProvider>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ProSidebarProvider>
+  </React.StrictMode>,
+)
+```
+
+▶️ Step 20: กำหนด Routing ที่ไฟล์ App.tsx
+
+```tsx
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
+import BackendLayout from './layouts/BackendLayout'
+import AuthLayout from './layouts/AuthLayout'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Login />} />
+        </Route>
+        <Route element={<BackendLayout />}>
+          <Route path="/backend/dashboard" element={<h1>Dashboard</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
+```
+
+▶️ Step 21: Create Product.tsx, Report.tsx, Setting.tsx in src/pages
+
+```tsx
+const Product = () => {
+    return (
+      <>
+          <h1>Product</h1>
+      </>
+    )
+  }
+  
+  export default Product
+  ```
+
+▶️ Step 22: Config Route in App.tsx
+
+```tsx
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
+import BackendLayout from './layouts/BackendLayout'
+import AuthLayout from './layouts/AuthLayout'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route path="/" element={<Login />} />
+        </Route>
+        <Route element={<BackendLayout />}>
+          <Route path="/backend/dashboard" element={<h1>Dashboard</h1>} />
+          <Route path="/backend/product" element={<h1>Product</h1>} />
+          <Route path="/backend/report" element={<h1>Report</h1>} />
+          <Route path="/backend/setting" element={<h1>Setting</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App
+```
+
+▶️ Step 23: Set Link in SideNav.tsx
+
+```tsx
+<MenuItem component={<Link to="/backend/dashboard" />} icon={<DashboardOutlinedIcon />}> <Typography variant="body2">Dashboard</Typography> </MenuItem>
+<MenuItem component={<Link to="/backend/product" />} icon={<SourceOutlinedIcon />}> <Typography variant="body2">Product </Typography></MenuItem>
+<MenuItem component={<Link to="/backend/report" />} icon={<AnalyticsOutlinedIcon />}> <Typography variant="body2">Report </Typography></MenuItem>
+<MenuItem component={<Link to="/backend/setting" />} icon={<StyleOutlinedIcon />}> <Typography variant="body2">Setting </Typography></MenuItem >
+```
+
+▶️ Step 24: Toggle SideNav
+
+```tsx
+import { useProSidebar } from "react-pro-sidebar"
+
+const AppHeader = () => {
+
+// useProSidebar hook
+  const { collapseSidebar, toggleSidebar, broken } = useProSidebar()
+
+}
+
+ <IconButton onClick={()=> broken ? toggleSidebar() : collapseSidebar()} color="secondary">
+    <MenuIcon />
+  </IconButton>
+```
+
+▶️ Step 25: Create Login Screen
+
+```tsx
+import { TextField, Button } from "@mui/material"
+
+const Login = () => {
+  return (
+    <>
+        <h1>Login</h1>
+        <form>
+          <div>
+            <TextField label="Username"
+              type="text"
+              variant="outlined"
+            />
+          </div>
+
+          <div>
+            <TextField label="Password"
+              type="password"
+              variant="outlined"
+            />
+          </div>
+          <div>
+            <Button variant="contained" color="primary" type="submit">
+              Login
+            </Button>
+          </div>
+        </form>
+    </>
+  )
+}
+
+export default Login
+```
+
+▶️ Step 26: การจัดการกับแบบฟอร์มด้วย react-hook-form
+
+>⚠️ ติดตั้ง package เรียกใช้งานที่หน้า Login.tsx
+
+```bash
+npm install react-hook-form@7 
+```
+
+```tsx
+import { TextField, Button } from "@mui/material"
+import { useForm } from "react-hook-form"
+
+const Login = () => {
+
+  // useForm hook
+  const { register, handleSubmit, formState: { errors } } = useForm()
+
+  // onSubmit function
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
+  return (
+    <>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <TextField label="Username"
+              type="text"
+              variant="outlined"
+              {...register("username", { required: true, minLength: 5 })}
+              error={errors.username ? true : false}
+              helperText={errors.username ? "Username is required" : ""}
+            />
+          </div>
+
+          <div>
+            <TextField label="Password"
+              type="password"
+              variant="outlined"
+              {...register("password", { required: true })}
+              error={errors.password ? true : false}
+              helperText={errors.password ? "Password is required" : ""}
+            />
+          </div>
+          <div>
+            <Button variant="contained" color="primary" type="submit">
+              Login
+            </Button>
+          </div>
+        </form>
+    </>
+  )
+}
+
+export default Login
+```
+</details>
+
+<br/>
+
+<br/>
+
+</details>
 
 # ⚡ Day 4 : Strapi CMS Rest API
 
@@ -541,3 +1434,4 @@ services:
       - web_network
 
 ```
+</details>
