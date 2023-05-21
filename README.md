@@ -191,6 +191,12 @@ docker compose up -d  --build
 
 # ⚡ Day 4 : Strapi CMS Rest API
 
+### เอกสารประกอบการอบรม
+
+- <https://github.com/iamsamitdev/react-mui-strapi-day4/tree/main>
+
+---
+
 <details>
 <summary> 👉 การขึ้นโปรเจ็กต์ Node Strapi CMS Rest API:</summary>
 <br/>
