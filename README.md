@@ -240,6 +240,11 @@ npx create-strapi-app@latest my-project --quickstart
 ```yarn
 yarn create strapi-app my-project --quickstart
 ```
- ***ลงทะเบียนผู้ใช้ผู้ดูแลระบบรายแรก***
+
+ > pnpm
+```pnpm
+pnpm create strapi-app my-project --quickstart
+```
+ ***ลงทะเบียนผู้ดูแลระบบรายแรก***
 
 [![Strapi](https://docs.strapi.io/assets/images/qsg-handson-part1-01-admin_panel-568a4a5b98f73196b58999f32abb8ea0.png)]()  
