@@ -191,7 +191,7 @@ pnpm add @mui/material @emotion/react @emotion/styled
 *ติดตั้ง Sass*
 
 ```npm
-npm install sass --save-dev
+npm install sass -D
 npm install sass -D
 ```
 
